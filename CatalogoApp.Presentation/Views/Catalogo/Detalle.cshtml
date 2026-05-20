@@ -1,5 +1,11 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model Catalogo.Models.Item
+ 
+<h1>@Model.Titulo</h1>
+ 
+<p><strong>Género:</strong> @Model.Genero</p>
+<p><strong>Consola:</strong> @Model.Consola</p>
+<p><strong>Año:</strong> @Model.Ano</p>
+<p><strong>Descripción:</strong> @Model.Descripcion</p>
+ 
+<hr />
+<a asp-action="Index">&larr; Volver al catálogo</a>
