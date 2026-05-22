@@ -1,77 +1,101 @@
-﻿using Catalogo.Models;
-using CatalogoApp.Domain.Models;
+﻿using CatalogoApp.Domain.Models;
+using CatalogoApp.Presentation.Helpers;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Catalogo.Controllers
+namespace CatalogoApp.Presentation.Controllers
 {
     public class CatalogoController : Controller
     {
-        /* CatalogoController
-         * ==================
-         * 
-         * Controlador encargado de gestionar el flujo de datos
-         * del catálogo de videojuegos.
-         * 
-         * Su función es recibir las peticiones del usuario,
-         * consultar la lista de items y devolver la vista
-         * correspondiente.
-         * * * * */
+        private readonly string rutaItems =
+            "Data/videojuegos.json";
 
-        private static List<Item> _items = new()
-        {
-            new Item {
-                Id          = 1,
-                Titulo      = "Devil May Cry",
-                Genero      = "Hack and Slash",
-                Ano         = 2001,
-                Consola     = "PlayStation 2",
-                Descripcion = "Videojuego que trata de un cazador mitad humano mitad demonio que debe evitar el regreso del rey del infierno."
-            },
-            new Item {
-                Id          = 2,
-                Titulo      = "Castlevania: Symphony of the Night",
-                Genero      = "Metroidvania",
-                Ano         = 1997,
-                Consola     = "PlayStation 2",
-                Descripcion = "Videojuego que trata de un cazador vampiro que debe detener a su padre, el conde Drácula."
-            },
-            new Item {
-                Id          = 3,
-                Titulo      = "NieR: Automata",
-                Genero      = "Acción-RPG",
-                Ano         = 2017,
-                Consola     = "PlayStation 4",
-                Descripcion = "Videojuego que trata de unos androides de batalla que deben detener a las máquinas alienígenas."
-            }
-        };
+        private readonly string rutaReviews =
+            "Data/reviews.json";
+
         public IActionResult Index(string? genero)
         {
-            var resultado = string.IsNullOrEmpty(genero)
-                ? _items
-                : _items.Where(i => i.Genero == genero).ToList();
+            var items =
+                JsonHelper.Leer<Item>(
+                    rutaItems);
 
-            ViewBag.Generos = _items.Select(i => i.Genero).Distinct().ToList();
-            ViewBag.GeneroActual = genero;
+            var resultado =
+                string.IsNullOrEmpty(genero)
+                ? items
+                : items.Where(
+                    i => i.Genero == genero)
+                    .ToList();
+
+            ViewBag.Generos =
+                items.Select(i => i.Genero)
+                     .Distinct()
+                     .ToList();
+
             return View(resultado);
         }
 
         public IActionResult Detalle(int id)
         {
-            var item = _items.FirstOrDefault(i => i.Id == id);
-            return item == null ? NotFound() : View(item);
-        }
+            var items =
+                JsonHelper.Leer<Item>(
+                    rutaItems);
 
-        public IActionResult Agregar()
-        {
-            return View();
+            var item =
+                items.FirstOrDefault(
+                    i => i.Id == id);
+
+            if (item == null)
+            {
+                return NotFound();
+            }
+
+            var reviews =
+                JsonHelper.Leer<Review>(
+                    rutaReviews);
+
+            ViewBag.Reviews =
+                reviews.Where(
+                    r => r.ItemId == id)
+                    .ToList();
+
+            return View(item);
         }
 
         [HttpPost]
-        public IActionResult Agregar(Item item)
+        public IActionResult AgregarReview(
+            int itemId,
+            string comentario,
+            int estrellas)
         {
-            item.Id = _items.Count + 1;
-            _items.Add(item);
-            return RedirectToAction("Index");
+            var usuario =
+                HttpContext.Session.GetString(
+                    "Usuario");
+
+            if (usuario == null)
+            {
+                return RedirectToAction(
+                    "Index",
+                    "Login");
+            }
+
+            var reviews =
+                JsonHelper.Leer<Review>(
+                    rutaReviews);
+
+            reviews.Add(new Review
+            {
+                ItemId = itemId,
+                Usuario = usuario,
+                Comentario = comentario,
+                Estrellas = estrellas
+            });
+
+            JsonHelper.Guardar(
+                rutaReviews,
+                reviews);
+
+            return RedirectToAction(
+                "Detalle",
+                new { id = itemId });
         }
     }
-} 
+}

@@ -1,11 +1,96 @@
-﻿@model Catalogo.Models.Item
- 
+﻿@model CatalogoApp.Domain.Models.Item
+
 <h1>@Model.Titulo</h1>
- 
+
 <p><strong>Género:</strong> @Model.Genero</p>
 <p><strong>Consola:</strong> @Model.Consola</p>
 <p><strong>Año:</strong> @Model.Ano</p>
 <p><strong>Descripción:</strong> @Model.Descripcion</p>
- 
+
 <hr />
-<a asp-action="Index">&larr; Volver al catálogo</a>
+
+@if (Context.Session.GetString("Usuario") != null)
+{
+    <p>
+        Bienvenido
+        @Context.Session.GetString("Usuario")
+    </p>
+
+    <a asp-controller="Login"
+           asp-action="Salir">
+        Cerrar sesión
+    </a>
+
+    <hr />
+
+    <h2>Agregar reseña</h2>
+
+    <form asp-action="AgregarReview"
+          method="post">
+
+        <input type="hidden"
+               name="itemId"
+               value="@Model.Id" />
+
+        <div>
+            <textarea name="comentario"
+                      class="form-control">
+            </textarea>
+        </div>
+
+        <br />
+
+        <div>
+            <label>Estrellas</label>
+
+            <select name="estrellas"
+                    class="form-control">
+
+                <option value="1">1 ⭐</option>
+                <option value="2">2 ⭐⭐</option>
+                <option value="3">3 ⭐⭐⭐</option>
+                <option value="4">4 ⭐⭐⭐⭐</option>
+                <option value="5">5 ⭐⭐⭐⭐⭐</option>
+
+            </select>
+        </div>
+
+        <br />
+
+        <button type="submit"
+                class="btn btn-primary">
+            Guardar reseña
+        </button>
+
+    </form>
+}
+else
+{
+    <a asp-controller="Login"
+           asp-action="Index">
+        Iniciar sesión para comentar
+    </a>
+}
+
+<hr />
+
+<h2>Reseñas</h2>
+
+@foreach (var r in ViewBag.Reviews)
+{
+    <div class="card p-3 mb-3">
+
+        <strong>@r.Usuario</strong>
+
+        <p>@r.Comentario</p>
+
+        <p>
+            @for (int i = 0; i < r.Estrellas; i++)
+            {
+                <span>⭐</span>
+            }
+        </p>
+
+    </div>
+}
+este donde va en login o en catalogo
