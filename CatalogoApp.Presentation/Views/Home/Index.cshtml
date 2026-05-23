@@ -1,8 +1,62 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Inicio";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    <h1 class="display-4">
+        Bienvenido a CatalogoApp
+    </h1>
+
+    <p class="lead">
+        Explora videojuegos, descubre reseñas
+        y comparte tu opinión con otros usuarios.
+    </p>
+
+    <hr />
+
+    <h2>¿Qué puedes hacer?</h2>
+
+    <div class="mt-4">
+
+        <p>🎮 Ver videojuegos del catálogo</p>
+
+        <p>⭐ Publicar reseñas y calificaciones</p>
+
+        <p>🔍 Filtrar juegos por género</p>
+
+        <p>👤 Crear una cuenta e iniciar sesión</p>
+
+    </div>
+
+    <hr />
+
+    <h2>Tecnologías utilizadas</h2>
+
+    <p>
+        ASP.NET Core MVC · C# · Razor · JSON · Bootstrap
+    </p>
+
+    <hr />
+
+    <div class="mt-4">
+
+        <a asp-controller="Catalogo"
+               asp-action="Index"
+               class="btn btn-primary btn-lg">
+
+            Ir al catálogo
+
+        </a>
+
+        <a asp-controller="Login"
+               asp-action="Index"
+               class="btn btn-success btn-lg ms-2">
+
+            Iniciar sesión
+
+        </a>
+
+    </div>
+
 </div>

@@ -21,9 +21,8 @@ namespace CatalogoApp.Presentation.Controllers
             var resultado =
                 string.IsNullOrEmpty(genero)
                 ? items
-                : items.Where(
-                    i => i.Genero == genero)
-                    .ToList();
+                : items.Where(i => i.Genero == genero)
+                      .ToList();
 
             ViewBag.Generos =
                 items.Select(i => i.Genero)
@@ -40,8 +39,7 @@ namespace CatalogoApp.Presentation.Controllers
                     rutaItems);
 
             var item =
-                items.FirstOrDefault(
-                    i => i.Id == id);
+                items.FirstOrDefault(i => i.Id == id);
 
             if (item == null)
             {
@@ -53,11 +51,38 @@ namespace CatalogoApp.Presentation.Controllers
                     rutaReviews);
 
             ViewBag.Reviews =
-                reviews.Where(
-                    r => r.ItemId == id)
-                    .ToList();
+                reviews.Where(r => r.ItemId == id)
+                       .ToList();
 
             return View(item);
+        }
+
+        // ✅ AGREGAR VIDEOJUEGO (GET)
+        public IActionResult Agregar()
+        {
+            return View();
+        }
+
+        // ✅ AGREGAR VIDEOJUEGO (POST)
+        [HttpPost]
+        public IActionResult Agregar(Item item)
+        {
+            var items =
+                JsonHelper.Leer<Item>(
+                    rutaItems);
+
+            item.Id =
+                items.Count > 0
+                ? items.Max(i => i.Id) + 1
+                : 1;
+
+            items.Add(item);
+
+            JsonHelper.Guardar(
+                rutaItems,
+                items);
+
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -67,14 +92,11 @@ namespace CatalogoApp.Presentation.Controllers
             int estrellas)
         {
             var usuario =
-                HttpContext.Session.GetString(
-                    "Usuario");
+                HttpContext.Session.GetString("Usuario");
 
             if (usuario == null)
             {
-                return RedirectToAction(
-                    "Index",
-                    "Login");
+                return RedirectToAction("Index", "Login");
             }
 
             var reviews =

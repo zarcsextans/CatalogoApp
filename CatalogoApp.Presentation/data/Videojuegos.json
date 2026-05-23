@@ -10,9 +10,25 @@
   {
     "Id": 2,
     "Titulo": "NieR Automata",
-    "Genero": "Acción RPG",
+    "Genero": "Acci\u00F3n RPG",
     "Consola": "PlayStation 4",
     "Ano": 2017,
-    "Descripcion": "Androides luchan contra máquinas."
+    "Descripcion": "Androides luchan contra m\u00E1quinas."
+  },
+  {
+    "Id": 3,
+    "Titulo": "Mario Galaxy",
+    "Genero": "Aventura",
+    "Consola": "Wii",
+    "Ano": 2007,
+    "Descripcion": "Es un videojuego de plataformas en 3D donde Mario viaja por el espacio para rescatar a la Princesa Peach del villano Bowser."
+  },
+  {
+    "Id": 4,
+    "Titulo": "Silent Hill",
+    "Genero": "Terror psicol\u00F3gico / Survival Horror",
+    "Consola": "PlayStation",
+    "Ano": 1999,
+    "Descripcion": "Es una saga de videojuegos de terror psicol\u00F3gico donde los protagonistas exploran una misteriosa y neblinosa ciudad llena de criaturas aterradoras y eventos sobrenaturales."
   }
 ]

@@ -1,29 +1,94 @@
 ﻿@model List<CatalogoApp.Domain.Models.Item>
- 
-<h1>Catálogo de Videojuegos</h1>
- 
-<!-- Filtro por Genero -->
-<div>
-    <a asp-action="Index">Todos</a>
+
+<h1 style="text-align:center; color:#ff69b4;">
+    🎮 Catálogo de Videojuegos 💖
+</h1>
+
+<hr />
+
+<!-- Filtro por Género -->
+<div style="text-align:center; margin-bottom:20px;">
+
+    <a asp-action="Index"
+           style="margin:5px; font-weight:bold;">
+        🌈 Todos
+    </a>
+
     @foreach (var gen in ViewBag.Generos as List<string>)
     {
         <span> | </span>
-        <a asp-action="Index" asp-route-genero="@gen">@gen</a>
+
+        <a asp-action="Index"
+               asp-route-genero="@gen"
+               style="margin:5px; color:#ff4fb0; font-weight:bold;">
+
+            💖 @gen
+
+        </a>
     }
+
 </div>
- 
+
 <hr />
- 
+
 <!-- Lista de Items -->
-<ul>
-    @foreach (var item in Model)
-    {
-        <li>
-            <a asp-action="Detalle" asp-route-id="@item.Id">@item.Titulo</a>
-            &mdash; @item.Genero &diams; @item.Ano
-        </li>
-    }
-</ul>
- 
+<div class="container">
+
+    <ul style="list-style:none; padding:0;">
+
+        @foreach (var item in Model)
+        {
+            <li style="
+                background:#fff0f6;
+                border:2px dashed #ff99cc;
+                border-radius:15px;
+                padding:15px;
+                margin-bottom:10px;
+                box-shadow:3px 3px 0px #ffb6c1;
+                ">
+
+                <a asp-action="Detalle"
+                       asp-route-id="@item.Id"
+                       style="font-size:18px; font-weight:bold; color:#ff4fb0;">
+
+                    🎀 @item.Titulo
+
+                </a>
+
+                <br />
+
+                <span>
+                    🎮 @item.Genero
+                </span>
+
+                <span>
+                    ✨ @item.Ano
+                </span>
+
+            </li>
+        }
+
+    </ul>
+
+</div>
+
 <hr />
-<a asp-action="Agregar">+ Agregar videojuego</a>
+
+<div style="text-align:center;">
+
+    <a asp-action="Agregar"
+           style="
+        display:inline-block;
+        padding:10px 20px;
+        background:#ff7ac8;
+        color:white;
+        border-radius:20px;
+        text-decoration:none;
+        font-weight:bold;
+        ">
+
+        + 🎮 Agregar videojuego 💖
+
+    </a>
+
+</div>

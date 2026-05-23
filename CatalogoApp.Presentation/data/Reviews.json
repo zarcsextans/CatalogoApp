@@ -4,5 +4,23 @@
     "Usuario": "scarlet",
     "Comentario": "            Magn\u00EDfico juego",
     "Estrellas": 5
+  },
+  {
+    "ItemId": 1,
+    "Usuario": "scarlet.ruelas@tecdesoftware.edu.mx",
+    "Comentario": "            muy buen juego me gusta",
+    "Estrellas": 5
+  },
+  {
+    "ItemId": 2,
+    "Usuario": "scarlet.ruelas@tecdesoftware.edu.mx",
+    "Comentario": "            Es un fabuloso juego",
+    "Estrellas": 5
+  },
+  {
+    "ItemId": 2,
+    "Usuario": "scarlet.ruelas@tecdesoftware.edu.mx",
+    "Comentario": null,
+    "Estrellas": 1
   }
 ]

@@ -28,4 +28,50 @@ body {
 
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
+
+}
+body {
+    background: linear-gradient(135deg, #ffe6f0, #e6f7ff, #fff5cc);
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+}
+
+    /* Fondo tipo doodle (flores, estrellas, corazones) */
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("https://www.transparenttextures.com/patterns/sketchy.png"), radial-gradient(circle at 10% 20%, pink 2px, transparent 3px), radial-gradient(circle at 70% 30%, lightblue 2px, transparent 3px), radial-gradient(circle at 40% 80%, lightyellow 2px, transparent 3px);
+        opacity: 0.25;
+        z-index: -1;
+    }
+
+h1, h2 {
+    color: #ff69b4;
+    text-shadow: 2px 2px white;
+}
+
+/* Tarjetas tipo “dibujadas a mano” */
+.card, ul, .form-control {
+    border-radius: 20px;
+    border: 2px dashed #ff99cc;
+    background: #ffffffcc;
+    box-shadow: 3px 3px 0px #ffb6c1;
+}
+
+/* Botones cute */
+.btn-primary {
+    background-color: #ff7ac8;
+    border: none;
+}
+
+    .btn-primary:hover {
+        background-color: #ff4fb0;
+    }
+
+a {
+    color: #ff4fb0;
+    font-weight: bold;
 }
